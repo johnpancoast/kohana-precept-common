@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # all these commands should be run from main repo dir.
-cd `dirname $0`/../
+cd `dirname $0`/../../../
 
 # installing git submodules.
 # TODO we should obviously just put all this stuff in an array to run eventually.
