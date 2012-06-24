@@ -1,0 +1,67 @@
+#!/bin/bash
+
+# all these commands should be run from main repo dir.
+cd `dirname $0`/../
+
+# installing git submodules.
+# TODO we should obviously just put all this stuff in an array to run eventually.
+
+# system
+# this is kohana's core functionality
+# http://github.com/kohana/core
+git submodule add http://github.com/kohana/core.git system
+
+# app modules.
+# determine which you need. comment those you don't. they can always
+# be added manually later.
+# we will most likely be using kohana-precept pretty often.
+# redbean is an addittional module that may be used.
+
+# our custom precept module.
+# https://github.com/shideon/kohana-precept
+git submodule add https://github.com/shideon/kohana-precept-common.git modules/precept-common
+
+# redbean orm integration
+# https://github.com/shideon/kohana-redbean
+git submodule add https://github.com/shideon/kohana-redbean.git modules/redbean
+
+#########################################################
+### The rest of these are the official Kohana modules.
+### They may or may not be needed.
+#########################################################
+# codebench
+# http://github.com/kohana/codebench
+git submodule add http://github.com/kohana/codebench.git modules/codebench
+
+# database
+# http://github.com/kohana/database
+git submodule add http://github.com/kohana/database.git modules/database
+
+# image
+# http://github.com/kohana/image
+git submodule add http://github.com/kohana/image.git modules/image
+
+# orm
+# http://github.com/kohana/orm
+git submodule add http://github.com/kohana/orm.git modules/orm
+
+# auth
+# http://github.com/kohana/auth
+git submodule add http://github.com/kohana/auth.git modules/auth
+
+# userguide
+# http://github.com/kohana/userguide
+git submodule add http://github.com/kohana/userguide.git modules/userguide
+
+# cache
+# http://github.com/kohana/cache
+git submodule add http://github.com/kohana/cache.git modules/cache
+
+# unittest
+# http://github.com/kohana/unittest
+git submodule add http://github.com/kohana/unittest.git modules/unittest
+
+########################
+# This will recursively update all submodules and any additional submodules a submodule may have. It may take some time.
+# You can omit the `recursive` flag if you'd like and manually update the submodules you know have dependencies.
+git submodule update --init --recursive

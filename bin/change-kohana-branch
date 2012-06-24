@@ -1,0 +1,32 @@
+#!/bin/bash
+
+BASEDIR=$( cd $(dirname $(dirname $0)/../.) && pwd)
+BRANCH=$1
+
+if [[ "x$BRANCH" = "x" ]]; then
+	echo "no branch specified"
+	exit
+fi
+
+# kohana system dir and official kohana modules
+DIRS=( "system modules/auth modules/cache modules/codebench modules/database modules/image modules/orm modules/unittest modules/userguide" )
+
+for i in $DIRS; do
+	if [[ -e "$BASEDIR/$i" ]]; then
+		echo "$i"
+		cd $BASEDIR/$i
+
+		# create the branch if it doesn't exist yet
+		if [ "x`git branch|grep $BRANCH`" = "x" ]; then
+			git branch $BRANCH remotes/origin/$BRANCH 
+		fi
+
+		git checkout $BRANCH
+		#cd $BASEDIR
+		#git add $BASEDIR/$i
+		echo ""
+	fi
+done
+	
+# make the main repo reference the commit hashes of the submodule's changed branches
+#git commit -m "changed kohana sub modules to branch '$BRANCH'"
